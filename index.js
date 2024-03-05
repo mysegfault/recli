@@ -1,6 +1,6 @@
-var home = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
-var defaultConfigFile = home + '/.recli.yml';
-var r      = require('rethinkdb'),
+const home = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+const defaultConfigFile = home + '/.recli.yml';
+const r      = require('rethinkdb'),
     coffee = require('coffee-script'),
     repl   = require('repl'),
     util   = require('util'),
@@ -25,10 +25,10 @@ var r      = require('rethinkdb'),
                .alias('version',  'v')
                .argv;
 
-var writer = function(rawResult) {
-  var result;
+const writer = function(rawResult) {
+  let result;
   if (opts.stream) {
-    var i = 0;
+    let i = 0;
     result = '';
     for (i in rawResult) {
       result += JSON.stringify(rawResult[i]) + os.EOL;
@@ -49,8 +49,8 @@ exports.recli = function() {
   } else if (opts.version) {
     console.log(pj.version);
   } else {
-    var globalSettings = {};
-    var userSettings   = {};
+    let globalSettings = {};
+    let userSettings   = {};
     if (opts.file) {
       // Only load global config file if a file has not been specified
       if (opts.file === defaultConfigFile) {
@@ -76,12 +76,12 @@ exports.recli = function() {
         throw err;
       } else {
         if (opts._.length) {
-          var code = opts._.join(' ');
+          let code = opts._.join(' ');
           if (opts.coffee) {
             code = coffee.compile(code, {bare: true});
           }
 
-          var re = eval(code);
+          const re = eval(code);
           misc.evalResult(conn, re, function(e, result) {
             if (e) {
               throw e;
@@ -95,7 +95,7 @@ exports.recli = function() {
             }
           });
         } else {
-          var cli = repl.start({prompt:    "recli> ",
+          const cli = repl.start({prompt:    "recli> ",
                                 eval:      misc.replEval,
                                 writer});
           cli.context.r = r;
@@ -119,4 +119,3 @@ exports.recli = function() {
 };
 
 exports.recli();
-
