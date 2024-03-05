@@ -6,10 +6,9 @@
   "main": "index.js",
   "preferGlobal": true,
   "dependencies": {
-    "coffee-script": "1.7.x",
+    "coffee-script": "^1.12.7",
     "js-yaml": "3.0.x",
     "optimist": "0.6.x",
-    "repl.history": "0.1.x",
     "rethinkdb": "^2.3.3"
   },
   "devDependencies": {
