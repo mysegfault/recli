@@ -1,7 +1,7 @@
 const home = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
 const defaultConfigFile = home + '/.recli.yml';
 const r      = require('rethinkdb'),
-    coffee = require('coffee-script'),
+    coffee = require('coffeescript'),
     repl   = require('repl'),
     util   = require('util'),
     os     = require('os'),
